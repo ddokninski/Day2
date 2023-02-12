@@ -10,24 +10,24 @@ public class TokenGenerator {
     public Token tokenGenerator() {
         Pattern pattern = Pattern.compile("(5)|(10)|(15)");
         Random random = new Random();
-        String userToken = "";
-        String valueFromUser = "";
+        StringBuilder userToken = new StringBuilder();
+//        String valueFromUser = "";
 
         while (true) {
             System.out.println("Enter token length (5 or 10 or 15): ");
             Scanner scanner = new Scanner(System.in);
-            valueFromUser = scanner.next();
+            String valueFromUser = scanner.next();
             valueFromUser = valueFromUser.trim();
             Matcher matcher = pattern.matcher(valueFromUser);
 
             if (matcher.matches()) {
                 int tokenLength = Integer.parseInt(valueFromUser);
-                while (tokenLength > 0) {
-                    tokenLength--;
+                for (int i = tokenLength; i > 0; i--) {
                     char randomChar = (char) (random.nextInt(256) + 1);
-                    userToken = userToken.concat(String.valueOf(randomChar));
+                    userToken.append(randomChar);
                 }
-                return new Token(userToken);
+                return new Token(userToken.toString());
+
             } else {
                 System.out.println("Wrong length. Type correct value 5 or 10 or 15");
             }
