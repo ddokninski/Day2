@@ -8,19 +8,17 @@ import java.util.regex.Pattern;
 public class TokenGenerator {
 
     public Token tokenGenerator() {
-        Pattern pattern = Pattern.compile("(5)|(10)|(15)");
         Random random = new Random();
-        StringBuilder userToken = new StringBuilder();
-//        String valueFromUser = "";
 
         while (true) {
+
             System.out.println("Enter token length (5 or 10 or 15): ");
             Scanner scanner = new Scanner(System.in);
             String valueFromUser = scanner.next();
-            valueFromUser = valueFromUser.trim();
-            Matcher matcher = pattern.matcher(valueFromUser);
+            boolean correctValueFromUserFlag = checkValueFromUser(valueFromUser);
 
-            if (matcher.matches()) {
+            if (correctValueFromUserFlag) {
+                StringBuilder userToken = new StringBuilder();
                 int tokenLength = Integer.parseInt(valueFromUser);
                 for (int i = tokenLength; i > 0; i--) {
                     char randomChar = (char) (random.nextInt(256) + 1);
@@ -29,8 +27,16 @@ public class TokenGenerator {
                 return new Token(userToken.toString());
 
             } else {
-                System.out.println("Wrong length. Type correct value 5 or 10 or 15");
+                System.out.println("Wrong value. Type correct value 5 or 10 or 15");
             }
         }
+    }
+
+    private boolean checkValueFromUser(String valueFromUser) {
+        Pattern pattern = Pattern.compile("(5)|(10)|(15)");
+        valueFromUser = valueFromUser.trim();
+        Matcher matcher = pattern.matcher(valueFromUser);
+
+        return matcher.matches();
     }
 }
