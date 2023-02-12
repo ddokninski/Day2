@@ -19,7 +19,7 @@ public class TokenGenerator {
                 break;
             }
 
-            System.out.println(correctValueFromUserFlag ? "Your token: " + tokenMaker(valueFromUser) : "Wrong value. Type correct value 5 or 10 or 15. For stop program type \"exit\" ");
+            System.out.println(correctValueFromUserFlag ? "Your " + valueFromUser + " digits  token: " + tokenMaker(valueFromUser) : "Wrong value. Type correct value 5 or 10 or 15. For stop program type \"exit\" ");
 
             if (correctValueFromUserFlag) {
                 break;
