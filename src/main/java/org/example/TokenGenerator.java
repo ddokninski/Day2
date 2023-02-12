@@ -9,7 +9,6 @@ public class TokenGenerator {
 
     public Token tokenGenerator() {
         Random random = new Random();
-        StringBuilder userToken = new StringBuilder();
 
         while (true) {
 
@@ -19,6 +18,7 @@ public class TokenGenerator {
             boolean correctValueFromUserFlag = checkValueFromUser(valueFromUser);
 
             if (correctValueFromUserFlag) {
+                StringBuilder userToken = new StringBuilder();
                 int tokenLength = Integer.parseInt(valueFromUser);
                 for (int i = tokenLength; i > 0; i--) {
                     char randomChar = (char) (random.nextInt(256) + 1);
