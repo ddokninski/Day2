@@ -6,7 +6,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TokenGenerator {
-
     public void tokenGenerator() {
         System.out.println("Enter token length (5 or 10 or 15) or exit: ");
 
@@ -19,7 +18,8 @@ public class TokenGenerator {
                 break;
             }
 
-            System.out.println(correctValueFromUserFlag ? "Your " + valueFromUser + " digits  token: " + tokenMaker(valueFromUser) : "Wrong value. Type correct value 5 or 10 or 15. For stop program type \"exit\" ");
+            System.out.println(correctValueFromUserFlag ?
+                    "Your " + valueFromUser + " digits token: " + tokenMaker(valueFromUser) : "Wrong value. Type correct value 5 or 10 or 15. For stop program type \"exit\" ");
 
             if (correctValueFromUserFlag) {
                 break;
@@ -31,15 +31,26 @@ public class TokenGenerator {
         Random random = new Random();
         StringBuilder userToken = new StringBuilder();
         int tokenLength = Integer.parseInt(valueFromUser);
-        for (int i = tokenLength; i > 0; i--) {
+        while (userToken.length() != tokenLength) {
             char randomChar = (char) (random.nextInt(256) + 1);
-            userToken.append(randomChar);
+
+            if (checkChar(String.valueOf(randomChar))) {
+                userToken.append(randomChar);
+            }
         }
         return (userToken.toString());
     }
 
     private boolean checkValueFromUser(String valueFromUser) {
         Pattern pattern = Pattern.compile("(5)|(10)|(15)");
+        valueFromUser = valueFromUser.trim();
+        Matcher matcher = pattern.matcher(valueFromUser);
+
+        return matcher.matches();
+    }
+
+    private boolean checkChar(String valueFromUser) {
+        Pattern pattern = Pattern.compile("[a-z]|[A-Z]|[0-9]|[!@#$%^&*()]");
         valueFromUser = valueFromUser.trim();
         Matcher matcher = pattern.matcher(valueFromUser);
 
